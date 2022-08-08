@@ -1,5 +1,6 @@
 package com.flickrapi.flickrapitest.controller;
 
+import com.flickrapi.flickrapitest.dto.JsonFlickrFeed;
 import com.flickrapi.flickrapitest.service.RestClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,5 +23,15 @@ public class RestClientController {
     @GetMapping("/tes")
     public String tes() {
         return "Hello";
+    }
+
+//    @GetMapping("/feed")
+//    public ResponseEntity<?> getItems() {
+//        return service.getItemsFeed();
+//    }
+
+    @GetMapping("/data")
+    public ResponseEntity<JsonFlickrFeed> getData() {
+        return service.getData();
     }
 }
