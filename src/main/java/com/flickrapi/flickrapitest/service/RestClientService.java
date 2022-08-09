@@ -20,19 +20,19 @@ public class RestClientService {
         return response;
     }
 
-//    public ResponseEntity<Items[]> getItemsFeed() {
-//        ResponseEntity<Items[]> response = restTemplate.getForEntity(
-//                "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1",
-//                Items[].class
-//        );
-//        return response;
-//    }
-
-    public ResponseEntity<JsonFlickrFeed> getData() {
-        JsonFlickrFeed response = restTemplate.getForObject(
-                "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1",
-                JsonFlickrFeed.class
-        );
+    public ResponseEntity<JsonFlickrFeed> getData(String param) {
+        JsonFlickrFeed response;
+        if (param.isEmpty()) {
+            response = restTemplate.getForObject(
+                    "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1",
+                    JsonFlickrFeed.class
+            );
+        } else {
+            response = restTemplate.getForObject(
+                    "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"+"&tags="+param,
+                    JsonFlickrFeed.class
+            );
+        }
 
         return ResponseEntity.ok(response);
     }
