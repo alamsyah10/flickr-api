@@ -22,7 +22,7 @@ public class RestClientService {
 
     public ResponseEntity<JsonFlickrFeed> getData(String param) {
         JsonFlickrFeed response;
-        if (param.isEmpty()) {
+        if (param == null || param.isEmpty()) {
             response = restTemplate.getForObject(
                     "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1",
                     JsonFlickrFeed.class

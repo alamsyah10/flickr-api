@@ -26,7 +26,7 @@ public class RestClientController {
     }
 
     @GetMapping("/feed")
-    public Items[] getItemsByParamsTag(@RequestParam(name = "tag") String tag) {
+    public Items[] getItemsByParamsTag(@RequestParam(required = false, name = "tag") String tag) {
         ResponseEntity<JsonFlickrFeed> data = service.getData(tag);
         return data.getBody().getItems();
     }
