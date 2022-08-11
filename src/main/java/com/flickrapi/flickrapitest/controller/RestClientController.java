@@ -3,10 +3,7 @@ package com.flickrapi.flickrapitest.controller;
 import com.flickrapi.flickrapitest.dto.Items;
 import com.flickrapi.flickrapitest.service.RestClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/flickr-data")
@@ -34,10 +31,12 @@ public class RestClientController {
         return data;
     }
 
-
-
-//    @GetMapping("/data")
-//    public ResponseEntity<JsonFlickrFeed> getData() {
-//        return service.getData("","");
-//    }
+    @GetMapping("/feed/{page}") //per page only contains 5 data, total feed data = 20, total page 4
+    public Items[] getPageItemsByParamsTag(@PathVariable("page") int page) {
+        if (page < 1 || page > 4) {
+            return null;
+        }
+        Items[] data = service.getDataByPage(page);
+        return data;
+    }
 }

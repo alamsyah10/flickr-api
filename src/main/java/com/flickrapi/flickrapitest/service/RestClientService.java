@@ -65,4 +65,19 @@ public class RestClientService {
 
         return new_items;
     }
+
+    public Items[] getDataByPage(int page) {
+        JsonFlickrFeed response;
+        Items[] items = new Items[5];
+        int index = 0;
+        response = restTemplate.getForObject("https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1", JsonFlickrFeed.class);
+        ResponseEntity<JsonFlickrFeed> data = ResponseEntity.ok(response);
+
+        for (int i=5*(page-1); i<5*page; i++) {
+            items[index] = data.getBody().getItems()[i];
+            index++;
+        }
+
+        return items;
+    }
 }
